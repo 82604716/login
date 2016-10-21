@@ -82,7 +82,7 @@
   
   
   
-  <property name="compiler.args.aouth" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  <property name="compiler.args.aouth" value="-encoding UTF-8 -source 1.8 -target 1.8 ${compiler.args}"/>
   
   <property name="aouth.output.dir" value="${module.aouth.basedir}/web/WEB-INF/classes"/>
   <property name="aouth.testoutput.dir" value="${module.aouth.basedir}/out/test/Aouth"/>
