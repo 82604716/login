@@ -1,0 +1,5 @@
+jdbcUrl = jdbc:mysql://jp.siganid.com:3306/Aouth
+user = root
+password = longkid
+devMode = true
+saveBasePath= C:/
