@@ -56,41 +56,6 @@
     <exclude name="**/?*.aj"/>
   </patternset>
   
-  <!-- JDK definitions -->
-  
-  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
-  <path id="jdk.classpath.1.8">
-    <fileset dir="${jdk.home.1.8}">
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/ext/access-bridge-64.jar"/>
-      <include name="jre/lib/ext/cldrdata.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/jaccess.jar"/>
-      <include name="jre/lib/ext/jfxrt.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-      <include name="jre/lib/ext/nashorn.jar"/>
-      <include name="jre/lib/ext/sunec.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/sunmscapi.jar"/>
-      <include name="jre/lib/ext/sunpkcs11.jar"/>
-      <include name="jre/lib/ext/zipfs.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/jfr.jar"/>
-      <include name="jre/lib/jfxswt.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/management-agent.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/resources.jar"/>
-      <include name="jre/lib/rt.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
-  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
-  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
-  
   
   <!-- Project Libraries -->
   
@@ -101,7 +66,13 @@
   </path>
   
   
- 
+  <!-- Application Server Libraries -->
+  
+  <path id="library.tomcat_6.0.36.classpath">
+    <pathelement location="H:/ssh/apache-tomcat-6.0.36-windows-x86/apache-tomcat-6.0.36/lib/jsp-api.jar"/>
+    <pathelement location="H:/ssh/apache-tomcat-6.0.36-windows-x86/apache-tomcat-6.0.36/lib/servlet-api.jar"/>
+  </path>
+  
   <!-- Modules -->
   
   
@@ -110,9 +81,6 @@
   <dirname property="module.aouth.basedir" file="${ant.file}"/>
   
   
-  <property name="module.jdk.home.aouth" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.aouth" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.aouth" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.aouth" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
   
@@ -124,7 +92,6 @@
   </path>
   
   <path id="aouth.module.production.classpath">
-    <path refid="${module.jdk.classpath.aouth}"/>
     
     <path refid="library.lib.classpath"/>
   </path>
@@ -135,9 +102,8 @@
   </path>
   
   <path id="aouth.module.classpath">
-    <path refid="${module.jdk.classpath.aouth}"/>
     <pathelement location="${aouth.output.dir}"/>
-    
+   
     <path refid="library.lib.classpath"/>
   </path>
   
@@ -168,7 +134,7 @@
   
   <target name="compile.module.aouth.production" description="Compile module Aouth; production classes">
     <mkdir dir="${aouth.output.dir}"/>
-    <javac destdir="${aouth.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.aouth}/javac">
+    <javac destdir="${aouth.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.aouth}"/>
       <bootclasspath refid="aouth.module.bootclasspath"/>
       <classpath refid="aouth.module.production.classpath"/>
