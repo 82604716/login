@@ -272,6 +272,17 @@
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
+
+  <target name="makewar" depends="build.all.artifacts">  
+        <war warfile="${basedir}/out/artifacts/Aouth_war_exploded/Aouth/Aouth.war" webxml="${basedir}/out/artifacts/Aouth_war_exploded/Aouth/WEB-INF/web.xml">  
+        <lib dir="${basedir}/out/artifacts/Aouth_war_exploded/Aouth/WEB-INF/lib">  
+            <include name="**" />  
+        </lib>  
+        <classes dir="${basedir}/out/artifacts/Aouth_war_exploded/Aouth/WEB-INF/classes"/>  
+        <fileset dir="${basedir}/out/artifacts/Aouth_war_exploded/Aouth"/>  
+        </war>  
+      
+  </target>  
   
-  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+  <target name="all" depends="build.modules, build.all.artifacts,makewar" description="build all"/>
 </project>
